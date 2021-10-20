@@ -1,23 +1,32 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Text } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import Onboarding from "./screens/onboarding";
-
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
+import SecureStorage from "./services/secure-storage";
 import Navigation from "./navigation";
+import useColorScheme from "./hooks/useColorScheme";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+  const [isFirstLoad, setIsFirstLoad] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    (async () => {
+      const notFirstLoad = await SecureStorage.Retrieve("notFirstLoad");
+
+      if (!notFirstLoad) {
+        setIsFirstLoad(true);
+      }
+    })();
+  }, []);
 
   if (!isLoadingComplete) {
     return null;
   } else {
     return (
       <SafeAreaProvider>
-        <Onboarding />
+        <Navigation colorScheme={colorScheme} isFirstLoad={isFirstLoad} />
 
         <StatusBar style="dark" />
       </SafeAreaProvider>

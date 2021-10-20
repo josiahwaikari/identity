@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import SecureStorage from "../../services/secure-storage";
 import { OnboardingPage } from "./interfaces";
 
 const pages: OnboardingPage[] = [
@@ -38,6 +39,11 @@ export default function withOnboardingContainer<P>(
     const nextPage = () => setPageNumber((prevPage) => prevPage + 1);
     const goToPage = (pageNumber: number) => setPageNumber(pageNumber);
 
+    const letsGetStarted = () => {
+      SecureStorage.Save("notFirstLoad", JSON.stringify(true));
+      props.navigation.navigate("Root");
+    };
+
     useEffect(() => {
       const pageToSet = pages.find((page) => page.id === pageNumber);
 
@@ -55,6 +61,7 @@ export default function withOnboardingContainer<P>(
         previousPage={previousPage}
         nextPage={nextPage}
         goToPage={goToPage}
+        letsGetStarted={letsGetStarted}
       />
     );
   };

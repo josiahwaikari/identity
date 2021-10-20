@@ -15,4 +15,5 @@ export interface OnboardingProps {
   nextPage: () => void;
   previousPage: () => void;
   goToPage: (pageNumberToGoTo: number) => void;
+  letsGetStarted: () => void;
 }

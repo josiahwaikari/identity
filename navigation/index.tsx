@@ -18,8 +18,10 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
+import Onboarding from "../screens/onboarding";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
+import SecureStorage from "../services/secure-storage";
 import {
   RootStackParamList,
   RootTabParamList,
@@ -29,15 +31,29 @@ import LinkingConfiguration from "./LinkingConfiguration";
 
 export default function Navigation({
   colorScheme,
+  isFirstLoad,
 }: {
   colorScheme: ColorSchemeName;
+  isFirstLoad: boolean;
 }) {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      theme={
+        colorScheme === "dark"
+          ? DarkTheme
+          : {
+              ...DefaultTheme,
+              ...{
+                colors: {
+                  ...DefaultTheme.colors,
+                  background: "#fff",
+                },
+              },
+            }
+      }
     >
-      <RootNavigator />
+      <RootNavigator isFirstLoad={isFirstLoad} />
     </NavigationContainer>
   );
 }
@@ -48,13 +64,20 @@ export default function Navigation({
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function RootNavigator() {
+function RootNavigator({ isFirstLoad }: { isFirstLoad: boolean }) {
   return (
     <Stack.Navigator>
+      {isFirstLoad && (
+        <Stack.Screen
+          name="Onboarding"
+          component={Onboarding}
+          options={{ headerShown: false }}
+        />
+      )}
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{ title: "Oops!" }}
       />
       <Stack.Screen
         name="NotFound"

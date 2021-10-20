@@ -42,10 +42,10 @@ function Onboarding(props: OnboardingProps) {
                 indiactorPages={props.indicatorPages}
                 pageNumber={props.pageNumber}
               />
-              <IconButton icon="angle-right" onPress={() => props.nextPage()} />
+              <IconButton icon="angle-right" onPress={props.nextPage} />
             </IndicatorAndButtonContainer>
           ) : (
-            <Button onPress={() => console.log("hi")}>Let's get started</Button>
+            <Button onPress={props.letsGetStarted}>Let's get started</Button>
           )}
         </FooterActionables>
       </OnboardingContainer>
