@@ -19,12 +19,9 @@ const ProgressBarFiller = styled.View<{ progress: number; colour: string }>`
   height: 100%;
   width: ${(props) => props.progress}%;
   background-color: ${(props) => props.colour};
-  border-radius: 50px;
 `;
 
 const ProgressBarContainer = styled.View`
   height: 20px;
   width: 100%;
-  background-color: #e0e0de;
-  border-radius: 50px;
 `;
