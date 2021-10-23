@@ -67,7 +67,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator({ isFirstLoad }: { isFirstLoad: boolean }) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        contentStyle: {
+          backgroundColor: "#FFFFFF",
+        },
+      }}
+    >
       {isFirstLoad && (
         <Stack.Screen
           name="Onboarding"
@@ -78,7 +84,17 @@ function RootNavigator({ isFirstLoad }: { isFirstLoad: boolean }) {
       <Stack.Screen
         name="Root"
         component={Identity}
-        options={{ headerShown: false }}
+        options={{
+          title: "My Ticket",
+          headerStyle: {
+            backgroundColor: "#fff",
+          },
+          headerTintColor: "#1657ff",
+          headerTitleStyle: {
+            fontWeight: "bold",
+          },
+          headerTitleAlign: "center",
+        }}
       />
       <Stack.Screen
         name="NotFound"

@@ -6,17 +6,19 @@ const headingSizes: HeadingSizesProps = {
   2: 40,
   3: 36,
   4: 26,
+  5: 18,
+  6: 12,
 };
 
 const headingWeights: HeadingWeightsProps = {
   light: "200",
   medium: "400",
-  bold: "600",
+  bold: "800",
 };
 
 const Heading: React.FC<HeadingProps> = (props) => {
   const text = props.text || props.children;
-  const size = props.size || 1;
+  const size = headingSizes[props.size!] || props.size || 16;
   const weight = props.weight || "bold";
   const transform = props.transform || undefined;
 
@@ -24,7 +26,7 @@ const Heading: React.FC<HeadingProps> = (props) => {
     <Text
       style={
         styles({
-          fontSize: headingSizes[size],
+          fontSize: size,
           fontWeight: headingWeights[weight] as Weights,
           textTransform: transform,
         }).heading
