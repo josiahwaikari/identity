@@ -16,6 +16,7 @@ import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import Identity from "../screens/identity";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import Onboarding from "../screens/onboarding";
@@ -76,8 +77,8 @@ function RootNavigator({ isFirstLoad }: { isFirstLoad: boolean }) {
       )}
       <Stack.Screen
         name="Root"
-        component={BottomTabNavigator}
-        options={{ title: "Oops!" }}
+        component={Identity}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="NotFound"
