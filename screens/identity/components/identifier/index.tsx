@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components/native";
 import QRCode from "react-qr-code";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const refreshTime = 3000;
 
@@ -22,7 +23,7 @@ export default function Identifier() {
   );
 }
 
-const IdentifierContainer = styled.View`
+const IdentifierContainer = styled(SafeAreaView)`
   display: flex;
   align-items: center;
   width: 100%;

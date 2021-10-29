@@ -13,7 +13,6 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
-
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import Identity from "../screens/identity";
@@ -22,7 +21,8 @@ import NotFoundScreen from "../screens/NotFoundScreen";
 import Onboarding from "../screens/onboarding";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
-import SecureStorage from "../services/secure-storage";
+import Transactions from "../screens/transactions";
+
 import {
   RootStackParamList,
   RootTabParamList,
@@ -85,23 +85,23 @@ function RootNavigator({ isFirstLoad }: { isFirstLoad: boolean }) {
         name="Root"
         component={Identity}
         options={{
-          title: "My Ticket",
-          headerStyle: {
-            backgroundColor: "#fff",
-          },
-          headerTintColor: "#1657ff",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          headerTitleAlign: "center",
+          headerShown: false,
         }}
       />
+
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
+      <Stack.Group screenOptions={{ presentation: "fullScreenModal" }}>
+        <Stack.Screen
+          name="Transactions"
+          component={Transactions}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
