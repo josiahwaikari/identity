@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import QRCode from "react-qr-code";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Paragraph } from "../../../../components";
 
 const refreshTime = 3000;
 
@@ -18,7 +19,7 @@ export default function Identifier() {
 
   return (
     <IdentifierContainer>
-      <QRCode value={value.toString()} bgColor="#1657ff" fgColor="#fff" />
+      <QRCode value={value.toString()} size={155} />
     </IdentifierContainer>
   );
 }
@@ -29,5 +30,4 @@ const IdentifierContainer = styled(SafeAreaView)`
   width: 100%;
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: #1657ff;
 `;
